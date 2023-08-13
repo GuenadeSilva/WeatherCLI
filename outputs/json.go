@@ -3,6 +3,7 @@ package outputs
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"weathercli/api" // Adjust this import path according to your project
 )
@@ -48,4 +49,34 @@ func PrintJSONFile(filename string) error {
 
 	fmt.Println(string(prettyJSON))
 	return nil
+}
+
+func JSONReader() {
+	// Open the JSON file
+	file, err := os.Open("datasets.json")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
+
+	// Read the JSON data from the file
+	dataBytes, err := io.ReadAll(file)
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	}
+
+	// Create a struct to hold the JSON data
+	var jsonData []api.Dataset
+
+	// Unmarshal the JSON data into the struct
+	err = json.Unmarshal(dataBytes, &jsonData)
+	if err != nil {
+		fmt.Println("Error unmarshaling JSON:", err)
+		return
+	}
+
+	fmt.Println(jsonData)
+
 }

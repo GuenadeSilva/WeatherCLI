@@ -12,13 +12,13 @@ func main() {
 	writeToJSON := flag.Bool("json", false, "Enable JSON writing")
 	flag.Parse()
 
-	// Scrape the data
-	dataset := api.ApiCall()
-
 	if flag.NArg() == 0 {
 		// No additional arguments provided, print contents of datasets.json
-		fmt.Println(api.PrettyStruct(dataset))
+		outputs.JSONReader()
+		return
 	}
+
+	dataset := api.ApiCall()
 
 	if *writeToJSON {
 		if err := outputs.ConvertResultsToJSONFile(dataset, "datasets.json"); err != nil {
