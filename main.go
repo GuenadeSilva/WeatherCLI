@@ -8,12 +8,15 @@ import (
 )
 
 func main() {
-	writeToCSV := flag.Bool("csv", false, "Enable CSV writing")
+	writeToCSV := flag.Bool("csv", true, "Enable CSV writing")
 	writeToJSON := flag.Bool("json", false, "Enable JSON writing")
 	flag.Parse()
 
 	if flag.NArg() == 0 {
-		fmt.Println("No output format selected. Exiting.")
+		// No additional arguments provided, print contents of datasets.json
+		if err := outputs.PrintJSONFile("datasets.json"); err != nil {
+			fmt.Println("Error printing JSON:", err)
+		}
 		return
 	}
 

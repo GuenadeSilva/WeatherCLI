@@ -14,4 +14,4 @@ FROM ubuntu:20.04
 
 COPY --from=builder /go/src/app/main /go/bin/main
 ENV PATH="/go/bin:${PATH}"
-CMD ["main"]
+CMD ["main","-csv=True"]
