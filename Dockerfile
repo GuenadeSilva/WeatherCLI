@@ -15,6 +15,8 @@ FROM ubuntu:20.04
 # Copy the datasets.json file from your local directory to the image
 COPY datasets.json /go/src/app/datasets.json
 
+WORKDIR /go/src/app
+
 COPY --from=builder /go/src/app/main /go/bin/main
 ENV PATH="/go/bin:${PATH}"
 CMD ["main"]
