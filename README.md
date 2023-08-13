@@ -85,7 +85,7 @@ docker run --rm weathercli:dev
 3. To build the image locally for production:
 
 ```bash
-docker build -t golang-pipeline:1.0.0 . --build-arg VERSION=1.0.0
+docker build -t weathercli:1.0.0 . --build-arg VERSION=1.0.0
 ```
 
 4. After that push the changes to "branch-name"
