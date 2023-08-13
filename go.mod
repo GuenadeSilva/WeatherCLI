@@ -1,4 +1,4 @@
-module weather-project
+module weathercli
 
 go 1.20
 
