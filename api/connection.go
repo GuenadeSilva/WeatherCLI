@@ -5,9 +5,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
-
-	"github.com/joho/godotenv"
 )
 
 type Dataset struct {
@@ -30,17 +27,14 @@ func ApiCall() []Dataset {
 		log.Fatal(err)
 		return nil
 	}
+	/*
+		tokenID := os.Getenv("CDO_TOKEN")
+		if tokenID == "" {
+			log.Fatal("CDO_TOKEN not found in environment")
+			return nil
+		}*/
 
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		log.Fatal("Error loading .env file:", errEnv)
-	}
-
-	tokenID := os.Getenv("CDO_TOKEN")
-	if tokenID == "" {
-		log.Fatal("CDO_TOKEN not found in environment")
-		return nil
-	}
+	tokenID := "zxyGZAQhXCHPWifCkkkfeFloZAAxooiC"
 
 	req.Header.Set("token", tokenID)
 
