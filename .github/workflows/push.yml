@@ -1,4 +1,4 @@
-name: weather-pipeline
+name: weathercli
 on: push
 jobs:
   test:
