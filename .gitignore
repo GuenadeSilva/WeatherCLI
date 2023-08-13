@@ -22,3 +22,6 @@ go.work
 
 # Token Access File
 .env
+
+# CSV output
+*.csv

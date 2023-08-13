@@ -8,20 +8,17 @@ import (
 )
 
 func main() {
-	writeToCSV := flag.Bool("csv", true, "Enable CSV writing")
+	writeToCSV := flag.Bool("csv", false, "Enable CSV writing")
 	writeToJSON := flag.Bool("json", false, "Enable JSON writing")
 	flag.Parse()
 
-	if flag.NArg() == 0 {
-		// No additional arguments provided, print contents of datasets.json
-		if err := outputs.PrintJSONFile("datasets.json"); err != nil {
-			fmt.Println("Error printing JSON:", err)
-		}
-		return
-	}
-
 	// Scrape the data
 	dataset := api.ApiCall()
+
+	if flag.NArg() == 0 {
+		// No additional arguments provided, print contents of datasets.json
+		fmt.Println(api.PrettyStruct(dataset))
+	}
 
 	if *writeToJSON {
 		if err := outputs.ConvertResultsToJSONFile(dataset, "datasets.json"); err != nil {
