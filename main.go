@@ -2,9 +2,16 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"weathercli/api"
 )
 
 func main() {
-	fmt.Println(string(api.ApiCall()))
+	dataset := api.ApiCall()
+
+	res, err := api.PrettyStruct(dataset)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(res)
 }

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -9,8 +10,21 @@ import (
 	"github.com/joho/godotenv"
 )
 
+type Dataset struct {
+	UID          string  `json:"uid"`
+	MindDate     string  `json:"mindate"`
+	MaxDate      string  `json:"maxdate"`
+	Name         string  `json:"name"`
+	Datacoverage float32 `json:"datacoverage"`
+	Id           string  `json:"id"`
+}
+
+type Datasets struct {
+	Results []Dataset `json:"results"`
+}
+
 // ApiCall is an exported function that makes an API call
-func ApiCall() []byte {
+func ApiCall() []Dataset {
 	req, err := http.NewRequest("GET", "https://www.ncdc.noaa.gov/cdo-web/api/v2/datasets", nil)
 	if err != nil {
 		log.Fatal(err)
@@ -43,5 +57,12 @@ func ApiCall() []byte {
 		return nil
 	}
 
-	return body
+	var datasets Datasets
+	err = json.Unmarshal(body, &datasets)
+	if err != nil {
+		log.Fatal(err)
+		return nil
+	}
+
+	return datasets.Results
 }
