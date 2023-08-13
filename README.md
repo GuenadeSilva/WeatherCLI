@@ -53,8 +53,8 @@ go run main.go -csv -json
 
 ## Configuration
 
-In order to connect to CDO API set up a `.env` file int the project directory with following variable:
-CDO_TOKEN=token
+In order to connect to CDO API set up a `.env` file int the project directory with following variable: <br />
+`CDO_TOKEN=token`
 
 ## License
 
